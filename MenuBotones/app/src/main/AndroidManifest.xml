@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mati.primerosejercicioslayout">
+    package="com.example.mati.menubotones">
 
     <application
         android:allowBackup="true"
@@ -15,9 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LinearLayout" />
-        <activity android:name=".TableLayout" />
-        <activity android:name=".RelativeLayout"></activity>
+        <activity android:name=".RadioButton" />
+        <activity android:name=".CheckBox"></activity>
     </application>
 
 </manifest>
