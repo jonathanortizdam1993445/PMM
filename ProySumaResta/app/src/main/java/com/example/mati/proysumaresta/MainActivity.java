@@ -28,9 +28,21 @@ public class MainActivity extends AppCompatActivity {
         suma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(R.id.radioButton==rg.getCheckedRadioButtonId()){
+                if(suma.isChecked() == true){
                     int sumar=Integer.valueOf(num1.getText().toString())+Integer.valueOf(num2.getText().toString());
-                    resultado.setText(sumar);
+                    String resul=String.valueOf(sumar);
+                    resultado.setText(resul);
+                }
+            }
+        });
+
+        resta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(resta.isChecked() == true){
+                    int sumar=Integer.valueOf(num1.getText().toString())-Integer.valueOf(num2.getText().toString());
+                    String resul=String.valueOf(sumar);
+                    resultado.setText(resul);
                 }
             }
         });
