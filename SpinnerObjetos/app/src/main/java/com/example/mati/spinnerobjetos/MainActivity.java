@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
             new Titular("Titulo 3", "subtitulo largo 3", R.drawable.android),
     };
 
+    private TextView lblMensaje;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
