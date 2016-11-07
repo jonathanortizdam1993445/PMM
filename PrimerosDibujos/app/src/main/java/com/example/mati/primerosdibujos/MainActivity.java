@@ -28,5 +28,8 @@ public class MainActivity extends AppCompatActivity {
             pintar.setStyle(Paint.Style.STROKE);
             canvas.drawCircle(500,500,80,pintar);
         }
+        
+
+
     }
 }
