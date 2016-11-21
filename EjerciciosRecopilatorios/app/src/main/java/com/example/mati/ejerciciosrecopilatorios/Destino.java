@@ -1,31 +1,29 @@
 package com.example.mati.ejerciciosrecopilatorios;
 
+import android.support.v7.app.AppCompatActivity;
 import java.io.Serializable;
+
 
 /**
  * Created by mati on 14/11/16.
  */
 
 public class Destino implements Serializable{
-    private String Zona,continente;
+    private String zona,continente;
     private String precio;
 
-    public Destino(){
-
-    }
-
-    public Destino(String lugar,String pais,String coste){
-        this.Zona=lugar;
-        this.continente=pais;
-        this.precio=coste;
+    public Destino (String zona, String continente, String precio){
+        this.zona=zona;
+        this.continente=continente;
+        this.precio=precio;
     }
 
     public String getZona() {
-        return Zona;
+        return zona;
     }
 
     public void setZona(String zona) {
-        Zona = zona;
+        this.zona = zona;
     }
 
     public String getContinente() {
@@ -47,7 +45,7 @@ public class Destino implements Serializable{
     @Override
     public String toString() {
         return "Destino{" +
-                "Zona='" + Zona + '\'' +
+                "zona='" + zona + '\'' +
                 ", continente='" + continente + '\'' +
                 ", precio=" + precio +
                 '}';

@@ -15,8 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Ejercicio1" />
-        <activity android:name=".Factura"></activity>
+        <activity android:name=".Destino" />
+        <activity android:name=".Factura" />
+        <activity android:name=".Acerca" />
+        <activity android:name=".Dibujar"></activity>
     </application>
 
 </manifest>
