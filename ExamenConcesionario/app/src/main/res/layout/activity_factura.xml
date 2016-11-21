@@ -9,25 +9,30 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.mati.ejerciciosrecopilatorios.Factura">
+    tools:context="com.example.mati.examenconcesionario.Factura">
 
     <TextView
-        android:text="zona: "
+        android:text="modelo: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/resultado_zona"
+        android:id="@+id/resultado_modelo"
         />
     <TextView
-        android:text="continente: "
+        android:text="marca: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/resultado_continente"
+        android:id="@+id/resultado_marca"
         />
     <TextView
         android:text="Precio fijo: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/resultado_precio"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/resultado_imagen"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -42,23 +47,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/resultado_precio_inicial"
+        android:id="@+id/resultado_precio_introducido"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/resultado_precio_incrementado"
+        android:id="@+id/resultado_coste"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/resultado_precio_final"
-        />
-
-    <TextClock
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textClock" />
-
-
 </LinearLayout>

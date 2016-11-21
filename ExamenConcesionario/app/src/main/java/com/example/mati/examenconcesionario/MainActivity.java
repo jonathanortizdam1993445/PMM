@@ -1,0 +1,221 @@
+package com.example.mati.examenconcesionario;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    //CREAMOS LA LISTA DE OBJETOS DEL SPINNER
+    private Coches[] coche=new Coches[]{
+            new Coches("Megane","Seat","20"),
+            new Coches("X-11","Ferrari","100"),
+            new Coches("Leon","Seat","30"),
+            new Coches("Ford","Fiesta","40")
+
+    };
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+    final RadioButton radio1 =(RadioButton)findViewById(R.id.radio_sin_seguro);
+    final RadioButton radio2 =(RadioButton)findViewById(R.id.radio_riesgo);
+    final RadioGroup grupo =(RadioGroup)findViewById(R.id.radio_grupo);
+
+    final EditText horas = (EditText)findViewById(R.id.texto_horas);
+    final CheckBox caja = (CheckBox)findViewById(R.id.caja_aire);
+    final CheckBox caja_gps = (CheckBox)findViewById(R.id.caja_gps);
+        final CheckBox caja_radio = (CheckBox)findViewById(R.id.caja_radio);
+
+    final Button boton = (Button)findViewById(R.id.boton_calcular);
+
+    boton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent ventana = new Intent(MainActivity.this,Factura.class);
+            Bundle objeto = new Bundle();
+
+            TextView marca_texto=(TextView)findViewById(R.id.resultado_marca);
+            TextView modelo_texto=(TextView)findViewById(R.id.resultado_modelo);
+            TextView precio_texto=(TextView)findViewById(R.id.resultado_precio);
+
+
+            String marca=marca_texto.getText().toString();
+            String modelo=modelo_texto.getText().toString();
+            String precios=precio_texto.getText().toString();
+
+            Coches datos = new Coches(marca,modelo,precios);
+
+
+            boolean selected1 = false;
+            boolean selected2 = false;
+            boolean selected3 = false;
+
+            if(caja.isChecked()){
+                selected1 = true;
+                TextView check1 = (TextView) findViewById(R.id.caja_aire);
+                check1.setText(caja.getText());
+            }
+
+            if(caja_gps.isChecked()){
+                selected2 = true;
+                TextView check2 = (TextView) findViewById(R.id.caja_gps);
+                check2.setText((caja_gps.getText()));
+            }
+            if(caja_radio.isChecked()){
+                selected3 = true;
+                TextView check3 = (TextView) findViewById(R.id.caja_radio);
+                check3.setText((caja_radio.getText()));
+            }
+
+            String nombre;
+
+            if (grupo.getCheckedRadioButtonId() == R.id.radio_sin_seguro) {
+                TextView radio1 = (TextView) findViewById(R.id.radio_sin_seguro);
+                radio1.setText(radio1.getText());
+                nombre=radio1.getText().toString();
+                ventana.putExtra("grupo", nombre);
+            }
+
+            if (grupo.getCheckedRadioButtonId() == R.id.radio_riesgo) {
+                TextView radio2 = (TextView) findViewById(R.id.radio_riesgo);
+                radio2.setText((radio2.getText()));
+                nombre=radio2.getText().toString();
+                ventana.putExtra("grupo", nombre);
+
+            }
+            //Precio del peso y pasarlo
+            double preciohora = 0;
+            double cost=0;
+
+            Double.parseDouble(horas.getText().toString());
+                preciohora = Double.parseDouble(horas.getText().toString())*Double.parseDouble(precio_texto.getText().toString());
+            if (caja.isChecked()){
+                cost=preciohora+50;
+            }
+            if (caja_gps.isChecked()){
+                cost=preciohora+50+50;
+            }
+            if (caja_radio.isChecked()){
+                cost=preciohora+50+50+50;
+            }
+
+
+            //PASO EL COSTE FIJO POR TIEMPO Y LAS HORAS INTRODUCIDAS
+
+            double total=preciohora+Double.parseDouble(precios.toString());//SI ES SIN SEGURO
+            double total2=(preciohora+Double.parseDouble(precios.toString()))*1.20;// SI ES CON SEGURO A TODOD RIESGO
+
+            ventana.putExtra("total",String.valueOf(total));
+            ventana.putExtra("total2",String.valueOf(total2));
+
+            ventana.putExtra("horas", horas.getText().toString());
+            ventana.putExtra("preciohora", String.valueOf(cost));
+
+
+            ventana.putExtra("boolean1",selected1);
+            ventana.putExtra("boolean2",selected2);
+            ventana.putExtra("boolean3",selected3);
+            ventana.putExtra("caja_aire",caja.getText().toString());
+            ventana.putExtra("caja_gps",caja_gps.getText().toString());
+            ventana.putExtra("caja_radio",caja_radio.getText().toString());
+            objeto.putSerializable("informacion",datos);
+            ventana.putExtras(objeto);
+            startActivity(ventana);
+        }
+    });
+
+
+    final Spinner spinner=(Spinner)findViewById(R.id.spinner);
+
+    Adaptador adaptador= new Adaptador(this);
+    spinner.setAdapter(adaptador);
+
+//seleccionar una opción de la lista desplegable,
+    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView arg0, View view, int position, long l) {
+            String mensaje="Seleccionado: Marca "+coche[position].getMarca()+" Modelo "+coche[position].getModelo()+" Precio "+coche[position].getPrecio();
+            Toast.makeText(getApplicationContext(),mensaje,Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    });
+
+}
+    //MENU ACERCA DE Y DIBUJAR
+
+    //PARA QUE SE VISUALICE EL MENU
+    public boolean onCreateOptionsMenu (Menu menu) {
+        MenuInflater inflate = getMenuInflater();
+        inflate.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected (MenuItem item){
+        switch (item.getItemId()){
+            case R.id.menu_acerca:
+                Intent acerca = new Intent(MainActivity.this, Acerca.class);
+                startActivity(acerca);
+                return true;
+            case R.id.menu_dibujar:
+                Intent dibujo = new Intent(MainActivity.this, Dibujar.class);
+                startActivity(dibujo);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+class Adaptador extends ArrayAdapter<Coches> {
+    public Activity context;
+
+    public Adaptador(Activity Context){
+        super(Context,R.layout.coches,coche);
+        this.context=Context;
+    }
+    public View getView(int position, View convertview, ViewGroup Parent){
+        LayoutInflater inflater=context.getLayoutInflater();
+        final View item = inflater.inflate(R.layout.activity_factura,null);
+
+//HAY QUE PASAR LAS ETIQUETA QUE SE USAN EN EL LAYOUT DE FACTURA Y RELACIONARLAS
+        TextView marca = (TextView)item.findViewById(R.id.resultado_marca);
+        TextView modelo = (TextView)item.findViewById(R.id.resultado_modelo);
+        final TextView precio = (TextView)item.findViewById(R.id.resultado_precio);
+
+        marca.setText(coche[position].getModelo());
+        modelo.setText(coche[position].getMarca());
+        precio.setText(String.valueOf(coche[position].getPrecio()));
+
+        return item;
+    }
+
+    public View getDropDownView(int position, View convertview, ViewGroup Parent){
+        View ver_spinner= getView(position,convertview,Parent);
+        return ver_spinner;
+    }
+}
+}
