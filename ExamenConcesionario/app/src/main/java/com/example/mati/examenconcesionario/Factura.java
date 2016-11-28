@@ -49,8 +49,5 @@ public class Factura extends AppCompatActivity {
 
         }else
             resultado_coste.setText("TOTAL :" + String.valueOf(getIntent().getStringExtra("total")) + "€ ");
-
-
-
     }
 }

@@ -26,11 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     //CREAMOS LA LISTA DE OBJETOS DEL SPINNER
     private Coches[] coche=new Coches[]{
-            new Coches("Megane","Seat","20"),
-            new Coches("X-11","Ferrari","100"),
-            new Coches("Leon","Seat","30"),
-            new Coches("Ford","Fiesta","40")
-
+            new Coches("Megane","Seat","20",R.drawable.megan3),
+            new Coches("X-11","Ferrari","100",R.drawable.ferrari1),
+            new Coches("Leon","Seat","30",R.drawable.leon1),
+            new Coches("Ford","Fiesta","40",R.drawable.fiesta1)
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +56,15 @@ public class MainActivity extends AppCompatActivity {
             TextView marca_texto=(TextView)findViewById(R.id.resultado_marca);
             TextView modelo_texto=(TextView)findViewById(R.id.resultado_modelo);
             TextView precio_texto=(TextView)findViewById(R.id.resultado_precio);
+            ImageView imagen=(ImageView) findViewById(R.id.resultado_imagen);
 
 
             String marca=marca_texto.getText().toString();
             String modelo=modelo_texto.getText().toString();
             String precios=precio_texto.getText().toString();
 
-            Coches datos = new Coches(marca,modelo,precios);
+
+            Coches datos = new Coches(marca,modelo,precios,R.id.resultado_imagen);
 
 
             boolean selected1 = false;
@@ -89,12 +90,12 @@ public class MainActivity extends AppCompatActivity {
 
             String nombre;
 
-            if (grupo.getCheckedRadioButtonId() == R.id.radio_sin_seguro) {
+
                 TextView radio1 = (TextView) findViewById(R.id.radio_sin_seguro);
                 radio1.setText(radio1.getText());
                 nombre=radio1.getText().toString();
                 ventana.putExtra("grupo", nombre);
-            }
+
 
             if (grupo.getCheckedRadioButtonId() == R.id.radio_riesgo) {
                 TextView radio2 = (TextView) findViewById(R.id.radio_riesgo);
@@ -119,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
                 cost=preciohora+50+50+50;
             }
 
-
             //PASO EL COSTE FIJO POR TIEMPO Y LAS HORAS INTRODUCIDAS
 
             double total=preciohora+Double.parseDouble(precios.toString());//SI ES SIN SEGURO
@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
 
             ventana.putExtra("horas", horas.getText().toString());
             ventana.putExtra("preciohora", String.valueOf(cost));
-
 
             ventana.putExtra("boolean1",selected1);
             ventana.putExtra("boolean2",selected2);
@@ -205,10 +204,12 @@ class Adaptador extends ArrayAdapter<Coches> {
         TextView marca = (TextView)item.findViewById(R.id.resultado_marca);
         TextView modelo = (TextView)item.findViewById(R.id.resultado_modelo);
         final TextView precio = (TextView)item.findViewById(R.id.resultado_precio);
+        ImageView imag=(ImageView)item.findViewById(R.id.resultado_imagen);
 
         marca.setText(coche[position].getModelo());
         modelo.setText(coche[position].getMarca());
         precio.setText(String.valueOf(coche[position].getPrecio()));
+        imag.setBackground(getDrawable(coche[position].getView()));
 
         return item;
     }
