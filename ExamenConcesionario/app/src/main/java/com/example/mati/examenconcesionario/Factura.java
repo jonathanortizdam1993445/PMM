@@ -21,6 +21,7 @@ public class Factura extends AppCompatActivity {
         TextView resultado_radio=(TextView)findViewById(R.id.resultado_radios);
         TextView resultado_precio_introducido=(TextView)findViewById(R.id.resultado_precio_introducido);
         TextView resultado_coste=(TextView)findViewById(R.id.resultado_coste);
+        TextView resultado_extra=(TextView)findViewById(R.id.extras);
 
 
         Bundle miBundle = getIntent().getExtras();
@@ -41,8 +42,10 @@ public class Factura extends AppCompatActivity {
         }
 
         resultado_radio.setText(resultado_radio.getText() + getIntent().getStringExtra("grupo"));
-
         resultado_precio_introducido.setText("tiempo introducido "+getIntent().getExtras().getString("horas"));
+        resultado_extra.setText("Extras :"+getIntent().getExtras().getString("Extra") );
+
+
 
         if (resultado_radio.getText().equals("SEGURO TODO RIESGO")) {
             resultado_coste.setText("TOTAL :" + String.valueOf(getIntent().getStringExtra("total2"))+ "€ ");

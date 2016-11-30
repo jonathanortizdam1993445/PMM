@@ -111,22 +111,23 @@ public class MainActivity extends AppCompatActivity {
             Double.parseDouble(horas.getText().toString());
                 preciohora = Double.parseDouble(horas.getText().toString())*Double.parseDouble(precio_texto.getText().toString());
             if (caja.isChecked()){
-                cost=preciohora+50;
+                cost+=50;
             }
             if (caja_gps.isChecked()){
-                cost=preciohora+50+50;
+                cost+=50;
             }
             if (caja_radio.isChecked()){
-                cost=preciohora+50+50+50;
+                cost+=50;
             }
 
             //PASO EL COSTE FIJO POR TIEMPO Y LAS HORAS INTRODUCIDAS
 
-            double total=preciohora+Double.parseDouble(precios.toString());//SI ES SIN SEGURO
-            double total2=(preciohora+Double.parseDouble(precios.toString()))*1.20;// SI ES CON SEGURO A TODOD RIESGO
+            double total=preciohora+cost;//SI ES SIN SEGURO
+            double total2=(preciohora+cost)*1.20;// SI ES CON SEGURO A TODOD RIESGO
 
             ventana.putExtra("total",String.valueOf(total));
             ventana.putExtra("total2",String.valueOf(total2));
+            ventana.putExtra("Extra",String.valueOf(cost));
 
             ventana.putExtra("horas", horas.getText().toString());
             ventana.putExtra("preciohora", String.valueOf(cost));

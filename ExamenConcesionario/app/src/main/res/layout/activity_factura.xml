@@ -50,4 +50,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/resultado_coste"
         />
+    <TextView
+        android:text="Extra: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/extras"
+        />
 </LinearLayout>
