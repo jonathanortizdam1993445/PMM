@@ -22,20 +22,32 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
-    //CREAMOS LA LISTA DE OBJETOS DEL SPINNER
+    private int[] Ford={R.drawable.fiesta1,R.drawable.fiesta2,R.drawable.fiesta3};
+    private int[] Ferrari={R.drawable.ferrari1,R.drawable.ferrari2,R.drawable.ferrari3};
+    private int[] Leon={R.drawable.leon1,R.drawable.leon2,R.drawable.leon3};
+    private int[] Megan={R.drawable.megan1,R.drawable.megan3};
+
+    Random randomimagenes= new Random();
+    int aleatorio=randomimagenes.nextInt(3);
+
     private Coches[] coche=new Coches[]{
-            new Coches("Megane","Seat","20",R.drawable.megan3),
-            new Coches("X-11","Ferrari","100",R.drawable.ferrari1),
-            new Coches("Leon","Seat","30",R.drawable.leon1),
-            new Coches("Ford","Fiesta","40",R.drawable.fiesta1)
+            new Coches("Megane","Seat","20",Ford[aleatorio]),
+            new Coches("X-11","Ferrari","100",Ferrari[aleatorio]),
+            new Coches("Leon","Seat","30",Leon[aleatorio]),
+            new Coches("Ford","Fiesta","40",Megan[aleatorio])
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //CREAMOS LA LISTA DE OBJETOS DEL SPINNER
     final RadioButton radio1 =(RadioButton)findViewById(R.id.radio_sin_seguro);
     final RadioButton radio2 =(RadioButton)findViewById(R.id.radio_riesgo);
     final RadioGroup grupo =(RadioGroup)findViewById(R.id.radio_grupo);
@@ -58,14 +70,12 @@ public class MainActivity extends AppCompatActivity {
             TextView precio_texto=(TextView)findViewById(R.id.resultado_precio);
             ImageView imagen=(ImageView) findViewById(R.id.resultado_imagen);
 
-
             String marca=marca_texto.getText().toString();
             String modelo=modelo_texto.getText().toString();
             String precios=precio_texto.getText().toString();
+            int im=Integer.parseInt(imagen.getDrawable().toString());
 
-
-            Coches datos = new Coches(marca,modelo,precios,R.id.resultado_imagen);
-
+            Coches datos = new Coches(marca,modelo,precios,im);
 
             boolean selected1 = false;
             boolean selected2 = false;
@@ -154,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView arg0, View view, int position, long l) {
-            String mensaje="Seleccionado: Marca "+coche[position].getMarca()+" Modelo "+coche[position].getModelo()+" Precio "+coche[position].getPrecio();
+            String mensaje="Seleccionado: Marca "+coche[position].getMarca()+" Modelo "+coche[position].getModelo()+" Precio "+coche[position].getPrecio()+" Imsgen "+coche[position].getView();
             Toast.makeText(getApplicationContext(),mensaje,Toast.LENGTH_LONG).show();
         }
 

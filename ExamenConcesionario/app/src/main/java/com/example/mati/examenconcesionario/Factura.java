@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Factura extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class Factura extends AppCompatActivity {
         TextView resultado_precio_introducido=(TextView)findViewById(R.id.resultado_precio_introducido);
         TextView resultado_coste=(TextView)findViewById(R.id.resultado_coste);
         TextView resultado_extra=(TextView)findViewById(R.id.extras);
+        ImageView resultado_imagen=(ImageView)findViewById(R.id.resultado_imagen);
 
 
         Bundle miBundle = getIntent().getExtras();
@@ -30,6 +32,8 @@ public class Factura extends AppCompatActivity {
         resultado_marca.setText("marca "+coche.getMarca());
         resultado_modelo.setText("modelo "+coche.getModelo());
         resultado_precio.setText("Precio por Hora "+coche.getPrecio());
+        resultado_imagen.setBackground(getDrawable(coche.getView()));
+
 
         if(getIntent().getExtras().getBoolean("boolean1")==true){
             resultado_caja.setText(getIntent().getStringExtra("caja_aire"));
@@ -44,8 +48,6 @@ public class Factura extends AppCompatActivity {
         resultado_radio.setText(resultado_radio.getText() + getIntent().getStringExtra("grupo"));
         resultado_precio_introducido.setText("tiempo introducido "+getIntent().getExtras().getString("horas"));
         resultado_extra.setText("Extras :"+getIntent().getExtras().getString("Extra") );
-
-
 
         if (resultado_radio.getText().equals("SEGURO TODO RIESGO")) {
             resultado_coste.setText("TOTAL :" + String.valueOf(getIntent().getStringExtra("total2"))+ "€ ");
