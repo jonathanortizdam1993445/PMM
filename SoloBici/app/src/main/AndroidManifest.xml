@@ -16,7 +16,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Juego" />
-        <activity android:name=".AcercaDe"></activity>
+        <activity android:name=".AcercaDe" />
+        <activity android:name=".VentanaPreferencias" />
+        <activity android:name=".PantallaOpciones" />
+        <activity android:name=".SettingsFragment"></activity>
     </application>
 
 </manifest>
