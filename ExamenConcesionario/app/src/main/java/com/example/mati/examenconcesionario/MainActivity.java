@@ -34,12 +34,18 @@ public class MainActivity extends AppCompatActivity {
     Random randomimagenes= new Random();
     int aleatorio=randomimagenes.nextInt(3);
 
+
+
+
+
     private Coches[] coche=new Coches[]{
             new Coches("Megane","Seat","20",Ford[aleatorio]),
             new Coches("X-11","Ferrari","100",Ferrari[aleatorio]),
             new Coches("Leon","Seat","30",Leon[aleatorio]),
             new Coches("Ford","Fiesta","40",Megan[aleatorio])
     };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
     final Button boton = (Button)findViewById(R.id.boton_calcular);
 
+
+
     boton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -70,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
             TextView precio_texto=(TextView)findViewById(R.id.resultado_precio);
             ImageView imagen=(ImageView) findViewById(R.id.resultado_imagen);
 
-            String marca=marca_texto.getText().toString();
-            String modelo=modelo_texto.getText().toString();
-            String precios=precio_texto.getText().toString();
-            int im=Integer.parseInt(imagen.getDrawable().toString());
+            final Spinner spinner=(Spinner)findViewById(R.id.spinner);
 
-            Coches datos = new Coches(marca,modelo,precios,im);
+            Coches datos = new Coches(coche[spinner.getSelectedItemPosition()].getModelo(),
+                    coche[spinner.getSelectedItemPosition()].getMarca(),
+                    coche[spinner.getSelectedItemPosition()].getPrecio(),
+                    coche[spinner.getSelectedItemPosition()].getView());
 
             boolean selected1 = false;
             boolean selected2 = false;
@@ -154,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
         }
     });
 
+        final Spinner spinner=(Spinner)findViewById(R.id.spinner);
 
-    final Spinner spinner=(Spinner)findViewById(R.id.spinner);
 
     Adaptador adaptador= new Adaptador(this);
     spinner.setAdapter(adaptador);
@@ -164,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView arg0, View view, int position, long l) {
-            String mensaje="Seleccionado: Marca "+coche[position].getMarca()+" Modelo "+coche[position].getModelo()+" Precio "+coche[position].getPrecio()+" Imsgen "+coche[position].getView();
+            String mensaje="Seleccionado: Marca "+coche[position].getMarca()+" Modelo "+coche[position].getModelo()+" Precio "+coche[position].getPrecio()+" Imagen "+coche[position].getView();
             Toast.makeText(getApplicationContext(),mensaje,Toast.LENGTH_LONG).show();
         }
 

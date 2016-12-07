@@ -25,15 +25,13 @@ public class Factura extends AppCompatActivity {
         TextView resultado_extra=(TextView)findViewById(R.id.extras);
         ImageView resultado_imagen=(ImageView)findViewById(R.id.resultado_imagen);
 
-
         Bundle miBundle = getIntent().getExtras();
         Coches coche = (Coches) miBundle.getSerializable("informacion");
 
         resultado_marca.setText("marca "+coche.getMarca());
         resultado_modelo.setText("modelo "+coche.getModelo());
         resultado_precio.setText("Precio por Hora "+coche.getPrecio());
-        resultado_imagen.setBackground(getDrawable(coche.getView()));
-
+        resultado_imagen.setImageDrawable(getDrawable(coche.getView()));
 
         if(getIntent().getExtras().getBoolean("boolean1")==true){
             resultado_caja.setText(getIntent().getStringExtra("caja_aire"));
