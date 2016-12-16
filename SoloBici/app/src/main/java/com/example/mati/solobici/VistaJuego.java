@@ -35,7 +35,7 @@ public class VistaJuego extends View {
     private int giroBici;    //Incremento direccion de la bici
     private float aceleracionBici;//Aumento de velocidad en la bici
     private static final int PASO_GIRO_BICI = 5;
-    private static final float PASO_ACELERACION_BICI = 0.5f;
+    private static final float PASO_ACELERACION_BICI = 2.5f;
 
     // THREAD Y TIEMPO //
     //Hilo encargado de procesar el tiempo
@@ -160,8 +160,6 @@ public class VistaJuego extends View {
 
         if (ruedaActiva)
             rueda.dibujaGrafico(canvas);
-
-
     }
 
     protected synchronized void actualizaMovimiento() {
@@ -214,14 +212,38 @@ public class VistaJuego extends View {
     }
 
 
-    private class HiloJuego extends Thread {
+     class HiloJuego extends Thread {
+        private boolean pausa,corriendo;
+        public synchronized void pausar(){
+            pausa=true;
+        }
+
+        public synchronized void reanudar(){
+            pausa=false;
+            notify();
+        }
+
+        public void detener(){
+            corriendo=false;
+            if (pausa) reanudar();
+        }
+
+
         @Override
         public void run() {
-            while (true) {
+            corriendo=true;
                 while (corriendo) {
                     actualizaMovimiento();
+                    synchronized (this){
+                        while (pausa){
+                            try {
+                                wait();
+                            }catch (Exception e){
+
+                            }
+                        }
+                    }
                 }
-            }
         }
     }
             public boolean onKeyDown(int codigoTecla, KeyEvent evento) {
@@ -256,17 +278,12 @@ public class VistaJuego extends View {
 //Procesamos la pulsación
         switch (codigoTecla) {
             case KeyEvent.KEYCODE_DPAD_UP:
-                aceleracionBici=+PASO_ACELERACION_BICI;
+                aceleracionBici=0;
                 break;
             case KeyEvent.KEYCODE_DPAD_LEFT:
-                giroBici=-PASO_GIRO_BICI;
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
-                giroBici=+PASO_GIRO_BICI;
-                break;
-            case KeyEvent.KEYCODE_DPAD_CENTER:
-            case KeyEvent.KEYCODE_ENTER:
-                lanzarRueda();
+                giroBici=0;
                 break;
             default:
 //Si estamos aquí no hemos pulsado nada que  interese
@@ -275,9 +292,6 @@ public class VistaJuego extends View {
         }
         return pulsacion;
     }
-
-
-
 
     public boolean onTouchEvent(MotionEvent evento) {
         super.onTouchEvent(evento);
