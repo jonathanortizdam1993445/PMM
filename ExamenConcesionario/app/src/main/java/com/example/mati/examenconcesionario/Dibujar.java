@@ -4,8 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class Dibujar extends AppCompatActivity {
@@ -20,6 +22,11 @@ public class Dibujar extends AppCompatActivity {
             super(context);
         }
 
+        float x=50;
+        float y=50;
+        String accion = "accion";
+        //permite dibujar cualquier cosa
+        Path path=new Path();
 
         protected void onDraw(Canvas canvas) {
 
@@ -29,6 +36,7 @@ public class Dibujar extends AppCompatActivity {
             Paint linea_delante = new Paint();
             Paint linea_trasera = new Paint();
             Paint curva = new Paint();
+
 
             rueda1.setColor(Color.BLACK);
             rueda1.setStrokeWidth(15);
@@ -66,6 +74,39 @@ public class Dibujar extends AppCompatActivity {
 
             canvas.drawRoundRect(1000,500,0,300,800,800,curva);
 
+            Paint tactil= new Paint();
+
+            tactil.setColor(Color.RED);
+            tactil.setStrokeWidth(15);
+            tactil.setStyle(Paint.Style.STROKE);
+
+            if(accion=="down"){
+                path.moveTo(x,y);
+            }
+
+            if(accion=="move"){
+                path.lineTo(x,y);
+
+            }
+            canvas.drawPath(path,tactil);
+
+        }
+        //devolver distintos valores(si estamos en la pantalla o no)
+        public boolean onTouchEvent(MotionEvent e){
+            x=e.getX();
+            y=e.getY();
+
+            //si presionamos la pantalla, la accion cambia a down
+            if (e.getAction()==MotionEvent.ACTION_DOWN){
+                accion="down";
+            }
+    //si movemos la pantalla, la accion cambia a move
+            if (e.getAction()==MotionEvent.ACTION_MOVE){
+                accion="move";
+            }
+            //actualiza nuestro dibujo
+            invalidate();
+            return true;
         }
     }
 }

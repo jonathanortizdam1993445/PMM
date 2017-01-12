@@ -34,10 +34,6 @@ public class MainActivity extends AppCompatActivity {
     Random randomimagenes= new Random();
     int aleatorio=randomimagenes.nextInt(3);
 
-
-
-
-
     private Coches[] coche=new Coches[]{
             new Coches("Megane","Seat","20",Ford[aleatorio]),
             new Coches("X-11","Ferrari","100",Ferrari[aleatorio]),
@@ -201,6 +197,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_dibujar:
                 Intent dibujo = new Intent(MainActivity.this, Dibujar.class);
                 startActivity(dibujo);
+                return true;
+            case R.id.menu_preferencias:
+                Intent ajustes = new Intent(MainActivity.this, PantallaOpciones.class);
+                startActivity(ajustes);
+                return true;
+            case R.id.menu_obtener_preferencias:
+                Intent obtener = new Intent(MainActivity.this, SettingsFragment.class);
+                startActivity(obtener);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
