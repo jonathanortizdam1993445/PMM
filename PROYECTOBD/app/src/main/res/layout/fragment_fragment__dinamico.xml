@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="com.example.mati.proyectobd.Fragment_Dinamico">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="500px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="271dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="255dp">
+
+            <TextView
+                android:id="@+id/juego_genero"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/juego_precio"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/juego_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="17dp" />
+
+                <Button
+                android:text="ACEPTAR"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/confirmar_compra"
+                android:layout_height="wrap_content" />
+
+                <Button
+                    android:text="CANCELAR"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/cancelar_compra"
+                    android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>
