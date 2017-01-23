@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -25,6 +26,7 @@ public class Fragment_Dinamico extends Fragment {
 
     Button aceptar,cancelar;
     Activity activity;
+    RelativeLayout layout;
 
     public Fragment_Dinamico() {
         // Required empty public constructor
@@ -39,14 +41,24 @@ public class Fragment_Dinamico extends Fragment {
 
         aceptar=(Button)view.findViewById(R.id.confirmar_compra);
         cancelar=(Button)view.findViewById(R.id.cancelar_compra);
+        layout=(RelativeLayout)view.findViewById(R.id.layout_fragment);
 
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 activity=getActivity();
                 Toast.makeText(activity,"GRACIAS POR LA COMPRA",Toast.LENGTH_LONG).show();
-                //TODO HACER QUE VUELVA A LA PANTALLA DE APLICACION
 
+                layout.setVisibility(View.INVISIBLE);
+
+
+            }
+        });
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layout.setVisibility(View.INVISIBLE);
             }
         });
         return view;

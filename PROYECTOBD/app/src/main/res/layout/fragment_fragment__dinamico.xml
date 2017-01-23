@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:id="@+id/layout_fragment"
     tools:context="com.example.mati.proyectobd.Fragment_Dinamico">
 
     <FrameLayout
@@ -15,7 +16,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_height="255dp">
+            android:layout_marginTop="60px"
+            android:layout_height="180dp">
 
             <TextView
                 android:id="@+id/juego_genero"
@@ -36,6 +38,25 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textSize="17dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/resultado_caja"
+                android:layout_gravity="center"
+                android:textSize="17dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/resultado_pago"
+                android:layout_gravity="center"
+                android:textSize="17dp"
+                android:layout_height="wrap_content"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
 
                 <Button
                 android:text="ACEPTAR"
@@ -50,7 +71,7 @@
                     android:layout_gravity="center"
                     android:id="@+id/cancelar_compra"
                     android:layout_height="wrap_content" />
-
+            </LinearLayout>
 
         </LinearLayout>
     </FrameLayout>

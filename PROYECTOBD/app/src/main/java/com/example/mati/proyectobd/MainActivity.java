@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(adelante);
                         //si son iguales entonces vamos a otra ventana
                     }else{
-                        String mensaje="Error: usuario o contraseña incorrecta. Vuelva a intentarlo.";
-                        Toast notificacion=Toast.makeText(getApplicationContext(),mensaje,Toast.LENGTH_LONG);
-                        notificacion.show();
+                        //String mensaje="Error: usuario o contraseña incorrecta. Vuelva a intentarlo.";
+                        Toast.makeText(getApplicationContext(),"Error: usuario o contraseña incorrecta. Vuelva a intentarlo.",Toast.LENGTH_LONG).show();
+
                     }
 
                 }
