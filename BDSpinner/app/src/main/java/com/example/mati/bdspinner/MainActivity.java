@@ -14,12 +14,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private Clientes[] datos=new Clientes[]{
-            new Clientes("pepe","123")
-    };
+    private Clientes[] datos;
+    //public ArrayList<Clientes> clientes = new ArrayList<Clientes>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +33,23 @@ public class MainActivity extends AppCompatActivity {
         //Obtenemos referencia a la base de datos para poder modificarla.
         SQLiteDatabase bd = cliBDh.getWritableDatabase();
 
-       // bd.execSQL("INSERT INTO Clientes (nombre, telefono) VALUES ('cli1','11111')");
-       // bd.execSQL("INSERT INTO Clientes (nombre, telefono) VALUES ('cli2','22222')");
+       bd.execSQL("INSERT INTO Clientes (nombre, telefono) VALUES ('cli1','11111')");
+       bd.execSQL("INSERT INTO Clientes (nombre, telefono) VALUES ('cli2','22222')");
 
-        String[] args3 = new String[]{"cli1,cli2"};
-        Cursor c = bd.rawQuery("SELECT nombre,telefono FROM Clientes WHERE nombre=? ", args3);
-
+        String[] campos = new String[]{"nombre","telefono"};
+        Cursor c = bd.query("Clientes", campos, null, null, null, null, null);
+        datos=new Clientes[c.getCount()];
+        int i=0;
         if (c.moveToFirst()) {
             //Recorremos el cursor hasta que no haya más registros
             do {
                 String nombreCli = c.getString(0);
                 String telefonoCli = c.getString(1);
+
+                datos[i] = new Clientes(nombreCli,telefonoCli);
+
+                i++;
+
             } while (c.moveToNext());
         }
 
