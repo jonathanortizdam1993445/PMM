@@ -20,11 +20,6 @@
         android:textColor="@color/amarillo"
         android:text="LOGIN" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="304dp">
-
         <TextView
             android:text="USUARIO"
             android:layout_width="500px"
@@ -70,12 +65,10 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100px"
                 android:layout_gravity="center"
                 android:id="@+id/Entrar"
                 android:text="ENTRAR"
                 />
-        </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"

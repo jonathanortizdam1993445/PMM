@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -27,6 +28,8 @@ public class Fragment_Dinamico extends Fragment {
     Button aceptar,cancelar;
     Activity activity;
     RelativeLayout layout;
+    TextView titulo,genero,precio;
+
 
     public Fragment_Dinamico() {
         // Required empty public constructor
@@ -43,9 +46,23 @@ public class Fragment_Dinamico extends Fragment {
         cancelar=(Button)view.findViewById(R.id.cancelar_compra);
         layout=(RelativeLayout)view.findViewById(R.id.layout_fragment);
 
+        titulo=(TextView)view.findViewById(R.id.juego_titulo);
+        genero=(TextView)view.findViewById(R.id.juego_genero);
+        precio=(TextView)view.findViewById(R.id.juego_precio);
+
+
+
+        Bundle mibundle=this.getArguments();
+        Juegos juego = (Juegos) mibundle.getSerializable("informacion");
+        titulo.setText("Titulo: "+juego.getTitulo());
+        genero.setText("Genero: "+juego.getGenero());
+        precio.setText("Precio: "+juego.getPrecio());
+
+
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 activity=getActivity();
                 Toast.makeText(activity,"GRACIAS POR LA COMPRA",Toast.LENGTH_LONG).show();
 

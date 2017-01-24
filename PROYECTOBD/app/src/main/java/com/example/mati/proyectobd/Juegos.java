@@ -1,10 +1,12 @@
 package com.example.mati.proyectobd;
 
+import java.io.Serializable;
+
 /**
  * Created by Jon on 17/01/2017.
  */
 
-public class Juegos {
+public class Juegos implements Serializable{
 
     String titulo,genero;
     Double precio;

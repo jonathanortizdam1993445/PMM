@@ -3,6 +3,7 @@ package com.example.mati.proyectobd;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -31,9 +32,6 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_aplicacion);
 
-        CheckBox pc=(CheckBox)findViewById(R.id.caja_pc);
-        CheckBox play=(CheckBox)findViewById(R.id.caja_play);
-        CheckBox xbox=(CheckBox)findViewById(R.id.caja_xbox);
         Button boton_comprar=(Button)findViewById(R.id.boton_comprar);
 
         BDJuegos juego = new BDJuegos(this, "DBJuegos", null, 1);
@@ -65,7 +63,7 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
         }
 
         AdaptadorJuegos adaptador = new AdaptadorJuegos(this);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(adaptador);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -87,6 +85,20 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
             public void onClick(View view) {
                 //TODO PASAR EL TITULO,GENERO Y PRECIO AL FRAGMENT
 
+
+                Bundle objetos= new Bundle();
+
+
+                Juegos datos= new Juegos(listado[spinner.getSelectedItemPosition()].getTitulo(),
+                        listado[spinner.getSelectedItemPosition()].getGenero(),
+                        listado[spinner.getSelectedItemPosition()].getPrecio());
+
+                objetos.putSerializable("informacion",datos);
+
+
+
+
+
                 //obtener la instancia del administrador de fragmentos
                 FragmentManager fragmentmanager =getFragmentManager();
 
@@ -95,6 +107,7 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
 
                 //crear un nuevo ojbeto de nuestro fragment y añadirlo
                 Fragment_Dinamico fragment= new Fragment_Dinamico();
+                fragment.setArguments(objetos);
                 transaction.add(R.id.activity_pantalla__aplicacion,fragment);
 
                 //confirmar el cambio

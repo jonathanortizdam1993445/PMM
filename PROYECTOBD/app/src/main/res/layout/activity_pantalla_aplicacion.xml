@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/spinner"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="11px"
         android:id="@+id/caja_pc" />
 
     <CheckBox
@@ -32,33 +32,34 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/caja_pc"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="11px"
         android:id="@+id/caja_play" />
 
     <CheckBox
         android:text="XBOX"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
+        android:layout_marginTop="250px"
+
+
         android:id="@+id/caja_xbox" />
 
     <Button
         android:text="COMPRAR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/caja_xbox"
+        android:layout_marginStart="26dp"
+        android:id="@+id/boton_comprar"
+        android:layout_below="@+id/radiogroup"
         android:layout_toEndOf="@+id/caja_xbox"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="30dp"
-        android:id="@+id/boton_comprar" />
+        android:layout_marginTop="33dp" />
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:id="@+id/radiogroup"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/boton_comprar"
-        android:layout_alignParentEnd="true">
+        android:layout_alignBottom="@+id/caja_xbox"
+        android:layout_toEndOf="@+id/caja_play">
 
     <RadioButton
         android:text="PAGO EN EFECTIVO"
