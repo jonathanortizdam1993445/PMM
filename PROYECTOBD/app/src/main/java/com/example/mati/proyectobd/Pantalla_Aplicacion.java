@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +35,7 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_aplicacion);
 
-        Button boton_comprar=(Button)findViewById(R.id.boton_comprar);
+        final Button boton_comprar=(Button)findViewById(R.id.boton_comprar);
 
         BDJuegos juego = new BDJuegos(this, "DBJuegos", null, 1);
 
@@ -84,10 +87,7 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
             @Override
             public void onClick(View view) {
                 //TODO PASAR EL TITULO,GENERO Y PRECIO AL FRAGMENT
-
-
                 Bundle objetos= new Bundle();
-
 
                 Juegos datos= new Juegos(listado[spinner.getSelectedItemPosition()].getTitulo(),
                         listado[spinner.getSelectedItemPosition()].getGenero(),
@@ -96,8 +96,39 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
                 objetos.putSerializable("informacion",datos);
 
 
+                CheckBox caja1=(CheckBox)findViewById(R.id.caja_pc);
+                CheckBox caja2=(CheckBox)findViewById(R.id.caja_play);
+                CheckBox caja3=(CheckBox)findViewById(R.id.caja_xbox);
+                RadioButton efectivo=(RadioButton)findViewById(R.id.pago_efectivo);
+                RadioButton tarjeta=(RadioButton)findViewById(R.id.pago_tarjeta);
+                RadioGroup grupo=(RadioGroup)findViewById(R.id.radiogroup);
 
+                boolean selected1=false;
+                boolean selected2=false;
+                boolean selected3=false;
+                if(caja1.isChecked()){
+                    selected1=true;
+                }
+                objetos.putBoolean("boolean1",selected1);
+                objetos.putString("caja_pc",caja1.getText().toString());
 
+                if(caja2.isChecked()){
+                    selected2=true;
+                }
+                objetos.putBoolean("boolean2",selected2);
+                objetos.putString("caja_play",caja2.getText().toString());
+
+                if(caja3.isChecked()){
+                    selected3=true;
+                }
+                objetos.putBoolean("boolean3",selected3);
+                objetos.putString("caja_xbox",caja3.getText().toString());
+
+                if(grupo.getCheckedRadioButtonId()==R.id.pago_efectivo){
+                    objetos.putString("grupo",efectivo.getText().toString());
+                }else {
+                    objetos.putString("grupo", tarjeta.getText().toString());
+                }
 
                 //obtener la instancia del administrador de fragmentos
                 FragmentManager fragmentmanager =getFragmentManager();
@@ -108,10 +139,13 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
                 //crear un nuevo ojbeto de nuestro fragment y añadirlo
                 Fragment_Dinamico fragment= new Fragment_Dinamico();
                 fragment.setArguments(objetos);
+
                 transaction.add(R.id.activity_pantalla__aplicacion,fragment);
 
                 //confirmar el cambio
                 transaction.commit();
+
+
 
             }
         });

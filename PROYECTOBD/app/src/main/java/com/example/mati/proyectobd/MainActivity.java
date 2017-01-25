@@ -51,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
                         Intent adelante= new Intent(MainActivity.this,Pantalla_Aplicacion.class);
                         startActivity(adelante);
                         //si son iguales entonces vamos a otra ventana
-                    }else{
+                    }else {
                         //String mensaje="Error: usuario o contraseña incorrecta. Vuelva a intentarlo.";
-                        Toast.makeText(getApplicationContext(),"Error: usuario o contraseña incorrecta. Vuelva a intentarlo.",Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(getApplicationContext(), "Error: usuario o contraseña incorrecta. Vuelva a intentarlo.", Toast.LENGTH_LONG).show();
                     }
+
 
                 }
             }
