@@ -37,9 +37,9 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
 
         final Button boton_comprar=(Button)findViewById(R.id.boton_comprar);
 
-        BDJuegos juego = new BDJuegos(this, "DBJuegos", null, 1);
+        BDUsuarios cliBDh = new BDUsuarios(this, "Usuarios", null, 1);
 
-        SQLiteDatabase bd = juego.getWritableDatabase();
+        SQLiteDatabase bd = cliBDh.getWritableDatabase();
 
         //bd.execSQL("INSERT INTO Juegos (Titulo, Genero, Precio) VALUES ('Mass Effect Andromeda','rol,aventuras','49,99')");
         //bd.execSQL("INSERT INTO Juegos (Titulo, Genero, Precio) VALUES ('The Witcher 3','RPG,aventuras','9,99')");
