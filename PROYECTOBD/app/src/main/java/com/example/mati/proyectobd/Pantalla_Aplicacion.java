@@ -11,6 +11,9 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -151,6 +154,24 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
         });
 
     }
+
+    public boolean onCreateOptionsMenu (Menu menu) {
+        MenuInflater inflate = getMenuInflater();
+        inflate.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected (MenuItem item){
+        switch (item.getItemId()){
+            case R.id.menu_acerca:
+                Intent acerca = new Intent(Pantalla_Aplicacion.this, Acerca.class);
+                startActivity(acerca);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     @Override
     public void onFragmentInteraction(Uri uri) {
