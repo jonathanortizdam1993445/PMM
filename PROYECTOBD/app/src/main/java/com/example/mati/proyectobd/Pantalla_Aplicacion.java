@@ -44,9 +44,14 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
 
         SQLiteDatabase bd = cliBDh.getWritableDatabase();
 
-        //bd.execSQL("INSERT INTO Juegos (Titulo, Genero, Precio) VALUES ('Mass Effect Andromeda','rol,aventuras','49,99')");
-        //bd.execSQL("INSERT INTO Juegos (Titulo, Genero, Precio) VALUES ('The Witcher 3','RPG,aventuras','9,99')");
-
+/*
+        bd.execSQL("INSERT INTO Juegos (Titulo, Genero, Precio) VALUES ('Mass Effect Andromeda','rol,aventuras','49.99')");
+        bd.execSQL("INSERT INTO Juegos (Titulo, Genero, Precio) VALUES ('The Witcher 3','RPG,aventuras','9.99')");
+        bd.execSQL("INSERT INTO Juegos (Titulo, Genero, Precio) VALUES ('Horizon zero dawn','RPG,aventuras','49.99')");
+        bd.execSQL("INSERT INTO Juegos (Titulo, Genero, Precio) VALUES ('Need for speed','conduccion','19.99')");
+        bd.execSQL("INSERT INTO Juegos (Titulo, Genero, Precio) VALUES ('Minecraft','Aventura,Supervivencia','19.99')");
+        bd.execSQL("INSERT INTO Juegos (Titulo, Genero, Precio) VALUES ('Assassins creed SAGA','Aventura,Accion,','114.99')");
+*/
         Toast.makeText(getApplicationContext(),"completado",Toast.LENGTH_LONG).show();
 
         String[] campos = new String[] {"Titulo", "Genero", "Precio"};
@@ -166,6 +171,10 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
             case R.id.menu_acerca:
                 Intent acerca = new Intent(Pantalla_Aplicacion.this, Acerca.class);
                 startActivity(acerca);
+                return true;
+            case R.id.menu_internet:
+                Intent internet = new Intent(Pantalla_Aplicacion.this, Internet.class);
+                startActivity(internet);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
