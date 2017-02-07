@@ -48,8 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
                     //preguntamos si los datos ingresados son iguales
                     if (usuario.equals(usu)&&contraseña.equals(pass)) {
+                        Bundle bundle= new Bundle();
                         Intent adelante= new Intent(MainActivity.this,Pantalla_Aplicacion.class);
                         startActivity(adelante);
+                        bundle.putString("usu",);
                         //si son iguales entonces vamos a otra ventana
                     }else {
                         //String mensaje="Error: usuario o contraseña incorrecta. Vuelva a intentarlo.";

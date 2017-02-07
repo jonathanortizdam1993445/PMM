@@ -3,6 +3,7 @@ package com.example.mati.proyectobd;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ public class Fragment_Dinamico extends Fragment {
     Activity activity;
     RelativeLayout layout;
     TextView titulo,genero,precio,caja,radio;
+    BDUsuarios cliBDh;
 
 
     public Fragment_Dinamico() {
@@ -54,8 +57,10 @@ public class Fragment_Dinamico extends Fragment {
         caja=(TextView)view.findViewById(R.id.resultado_caja);
         radio=(TextView)view.findViewById(R.id.resultado_pago);
 
+        final EditText usuario=(EditText)view.findViewById(R.id.verificar_usuario);
+
         Bundle mibundle=this.getArguments();
-        Juegos juego = (Juegos) mibundle.getSerializable("informacion");
+        final Juegos juego = (Juegos) mibundle.getSerializable("informacion");
 
         titulo.setText("Titulo: "+juego.getTitulo());
         genero.setText("Genero: "+juego.getGenero());
@@ -85,9 +90,14 @@ public class Fragment_Dinamico extends Fragment {
 
                 layout.setVisibility(View.INVISIBLE);
 
+                cliBDh = new BDUsuarios(getActivity().getApplicationContext(), "Usuarios", null, 1);
+
+                SQLiteDatabase bd = cliBDh.getWritableDatabase();
+                bd.execSQL("INSERT INTO Ventas (usuarios,Titulo,Genero,Precio,Plataforma,Forma_pago) VALUES" +
+                        " ('1','"+juego.getTitulo()+"','"+juego.getGenero()+"','"+juego.getPrecio()+"','"+caja.getText()+"','"+radio.getText()+"')");
 
 
-
+                Toast.makeText(getActivity().getApplicationContext(),"REGISTRO COMPLETADO",Toast.LENGTH_LONG).show();
             }
         });
 
