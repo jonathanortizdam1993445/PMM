@@ -11,7 +11,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class BDUsuarios extends SQLiteOpenHelper {
     String consulta= "CREATE TABLE Usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT,usuario TEXT, password TEXT)";
     String consulta2= "CREATE TABLE Juegos (Titulo TEXT, Genero TEXT, Precio DOUBLE)";
-    String consulta3="CREATE TABLE Ventas (usuarios TEXT, Titulo TEXT, Genero TEXT, Precio DOUBLE, Plataforma TEXT, Forma_pago TEXT, FOREIGN KEY (usuarios) REFERENCES Usuarios (id))";
+    String consulta3="CREATE TABLE Ventas (usuarios TEXT, Titulo TEXT, Genero TEXT, Precio DOUBLE, Plataforma TEXT" +
+            ", Forma_pago TEXT, FOREIGN KEY (usuarios) REFERENCES Usuarios (id))";
 
 
 

@@ -104,6 +104,7 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
                 objetos.putSerializable("informacion",datos);
 
 
+
                 CheckBox caja1=(CheckBox)findViewById(R.id.caja_pc);
                 CheckBox caja2=(CheckBox)findViewById(R.id.caja_play);
                 CheckBox caja3=(CheckBox)findViewById(R.id.caja_xbox);
@@ -137,6 +138,10 @@ public class Pantalla_Aplicacion extends AppCompatActivity implements Fragment_D
                 }else {
                     objetos.putString("grupo", tarjeta.getText().toString());
                 }
+
+                String usu= getIntent().getStringExtra("usuario");
+                objetos.putSerializable("usuario",usu);
+
 
                 //obtener la instancia del administrador de fragmentos
                 FragmentManager fragmentmanager =getFragmentManager();

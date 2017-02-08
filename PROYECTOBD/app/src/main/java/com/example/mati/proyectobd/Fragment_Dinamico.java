@@ -3,6 +3,7 @@ package com.example.mati.proyectobd;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.widget.Toast;
  */
 public class Fragment_Dinamico extends Fragment {
 
+    Integer[] id;
     private OnFragmentInteractionListener mListener;
 
     Button aceptar,cancelar,comprar;
@@ -59,7 +61,7 @@ public class Fragment_Dinamico extends Fragment {
 
         final EditText usuario=(EditText)view.findViewById(R.id.verificar_usuario);
 
-        Bundle mibundle=this.getArguments();
+        final Bundle mibundle=this.getArguments();
         final Juegos juego = (Juegos) mibundle.getSerializable("informacion");
 
         titulo.setText("Titulo: "+juego.getTitulo());
@@ -93,11 +95,31 @@ public class Fragment_Dinamico extends Fragment {
                 cliBDh = new BDUsuarios(getActivity().getApplicationContext(), "Usuarios", null, 1);
 
                 SQLiteDatabase bd = cliBDh.getWritableDatabase();
-                bd.execSQL("INSERT INTO Ventas (usuarios,Titulo,Genero,Precio,Plataforma,Forma_pago) VALUES" +
-                        " ('1','"+juego.getTitulo()+"','"+juego.getGenero()+"','"+juego.getPrecio()+"','"+caja.getText()+"','"+radio.getText()+"')");
 
 
-                Toast.makeText(getActivity().getApplicationContext(),"REGISTRO COMPLETADO",Toast.LENGTH_LONG).show();
+
+                //PROBAR EN VEZ DE ESCRIBIR, PRIMERO LEER EL ID, Y DESPUES ESCRIBIRLO
+
+                Cursor cursor = bd.rawQuery("SELECT id FROM Usuarios where usuario= '" +mibundle.getString("usuario")+ "';", null);
+
+                id = new Integer[cursor.getCount()];
+                //  empieza el recorrido desde el principio
+                if(cursor.moveToFirst()) {
+                    do {
+                        String ids = cursor.getString(0);
+                        id[0] = Integer.parseInt(ids);
+                    } while (cursor.moveToNext());
+                     try {
+                         bd.execSQL("INSERT INTO Ventas (usuarios,Titulo,Genero,Precio,Plataforma,Forma_pago) VALUES" +
+                                 " ('"+id[0]+"','" + juego.getTitulo() + "','" + juego.getGenero() + "','" + juego.getPrecio() + "','" + caja.getText() + "','" + radio.getText() + "')");
+
+                         Toast.makeText(getActivity().getApplicationContext(), "REGISTRO COMPLETADO", Toast.LENGTH_LONG).show();
+
+                     }catch (Exception e){
+                         e.getMessage();
+
+                     }
+                }
             }
         });
 

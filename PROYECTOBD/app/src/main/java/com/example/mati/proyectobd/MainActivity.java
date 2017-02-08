@@ -34,24 +34,27 @@ public class MainActivity extends AppCompatActivity {
 
                 SQLiteDatabase bd = cliBDh.getWritableDatabase();
 
+                //guardamos los datos introducido en la variables
                 String usuario=verificar_usuario.getText().toString();
                 String contraseña=verificar_contraseña.getText().toString();
 
                 Cursor fila=bd.rawQuery("SELECT usuario,password FROM Usuarios WHERE usuario='"+usuario+"' and password='"+contraseña+"'",null);
 
-                //si el cursor tiene algun valor almacenado
+                //para que se coloque en el principio
                 if(fila.moveToFirst()) {
                     //capturamos los valores del cursos y lo almacenamos en variable
                     String usu = fila.getString(0);
                     String pass = fila.getString(1);
 
 
-                    //preguntamos si los datos ingresados son iguales
+                    //preguntamos si los datos ingresados son iguales, si coinciden con los almacenados en la bd, puede pasar a la aplicacion
                     if (usuario.equals(usu)&&contraseña.equals(pass)) {
-                        Bundle bundle= new Bundle();
+
                         Intent adelante= new Intent(MainActivity.this,Pantalla_Aplicacion.class);
+                        adelante.putExtra("usuario", usu);
                         startActivity(adelante);
-                        bundle.putString("usu",);
+
+
                         //si son iguales entonces vamos a otra ventana
                     }else {
                         //String mensaje="Error: usuario o contraseña incorrecta. Vuelva a intentarlo.";
