@@ -24,14 +24,14 @@ public class MainActivity extends AppCompatActivity {
         final EditText verificar_usuario=(EditText)findViewById(R.id.verificar_usuario);
         final EditText verificar_contraseña=(EditText)findViewById(R.id.verificar_contraseña);
 
-        //Abrimos la base de datos en modo escritura
+        
         cliBDh = new BDUsuarios(this, "Usuarios", null, 1);
 
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //verificar si el usuario y contraseña está en la bd, si es asi, puede entrar dentro
-
+                //Abrimos la base de datos en modo escritura
                 SQLiteDatabase bd = cliBDh.getWritableDatabase();
 
                 //guardamos los datos introducido en la variables
@@ -48,17 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
 
                     //preguntamos si los datos ingresados son iguales, si coinciden con los almacenados en la bd, puede pasar a la aplicacion
+                    //si son iguales entonces vamos a otra ventana
                     if (usuario.equals(usu)&&contraseña.equals(pass)) {
-
                         Intent adelante= new Intent(MainActivity.this,Pantalla_Aplicacion.class);
                         adelante.putExtra("usuario", usu);
                         startActivity(adelante);
 
 
-                        //si son iguales entonces vamos a otra ventana
+                        
                     }else {
                         //String mensaje="Error: usuario o contraseña incorrecta. Vuelva a intentarlo.";
-                        Toast.makeText(getApplicationContext(),"completado",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Usuario o contraseña incorrecta.Vuelva a intentarlo",Toast.LENGTH_LONG).show();
 
                     }
                 }
