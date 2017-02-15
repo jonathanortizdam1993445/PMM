@@ -44,6 +44,8 @@ public class BDUsuarios extends SQLiteOpenHelper {
 
         //Creamos la nueva versi�n de la tabla
         bd.execSQL(consulta);
+        bd.execSQL(consulta2);
+        bd.execSQL(consulta3);
 
     }
 
